@@ -12,24 +12,27 @@ const deckParams = [
     // The above parameters can be optimized via FSRS4Anki optimizer.
     // For details about the parameters, please see: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
     // User's custom parameters for global
-    "requestRetention": 0.9, // recommended setting: 0.8 ~ 0.9
+    "requestRetention": 0.85, // recommended setting: 0.8 ~ 0.9
     "maximumInterval": 36500,
     // FSRS only modifies the long-term scheduling. So (re)learning steps in deck options work as usual.
     // I recommend setting steps shorter than 1 day.
   },
   {
-    // Example 1: User's custom parameters for this deck and its sub-decks.
-    "deckName": "MainDeck1",
-    "w": [0.6, 0.9, 2.9, 6.8, 4.72, 1.02, 1, 0.04, 1.49, 0.17, 1.02, 2.15, 0.07, 0.35, 1.17, 0.32, 2.53],
+    "deckName": "Opos::Cortas",
+    "w": [1.06, 1.12, 3.22, 30.0, 4.8702, 1.2396, 1.1285, 0.0036, 1.7224, 0.1, 1.1574, 2.2221, 0.0657, 0.4223, 1.335, 0.0403, 2.9043],
     "requestRetention": 0.9,
     "maximumInterval": 36500,
   },
   {
-    // Example 2: User's custom parameters for this deck and its sub-decks.
-    // Don't omit any keys.
-    "deckName": "MainDeck2::SubDeck::SubSubDeck",
-    "w": [0.6, 0.9, 2.9, 6.8, 4.72, 1.02, 1, 0.04, 1.49, 0.17, 1.02, 2.15, 0.07, 0.35, 1.17, 0.32, 2.53],
+    "deckName": "Opos::Tribu",
+    "w": [8.46, 8.47, 8.47, 8.47, 4.9413, 1.1572, 1.0326, 0.0066, 1.6761, 0.1, 1.1228, 2.1537, 0.0808, 0.3313, 1.3693, 0.1238, 2.6495],
     "requestRetention": 0.9,
+    "maximumInterval": 36500,
+  },
+  {
+    "deckName": "Opos::Tribulargo",
+    "w": [0.39, 0.41, 0.78, 9.04, 5.0394, 1.099, 0.9815, 0.0059, 1.4402, 0.1954, 0.8875, 2.2675, 0.0139, 0.3914, 1.3411, 0.1294, 2.5535],
+    "requestRetention": 0.86,
     "maximumInterval": 36500,
   }
 ];
