@@ -16,24 +16,6 @@ const deckParams = [
     "maximumInterval": 36500,
     // FSRS only modifies the long-term scheduling. So (re)learning steps in deck options work as usual.
     // I recommend setting steps shorter than 1 day.
-  },
-  {
-    "deckName": "Opos::Cortas",
-    "w": [1.06, 1.12, 3.22, 30.0, 4.8702, 1.2396, 1.1285, 0.0036, 1.7224, 0.1, 1.1574, 2.2221, 0.0657, 0.4223, 1.335, 0.0403, 2.9043],
-    "requestRetention": 0.9,
-    "maximumInterval": 36500,
-  },
-  {
-    "deckName": "Opos::Tribu",
-    "w": [8.46, 8.47, 8.47, 8.47, 4.9413, 1.1572, 1.0326, 0.0066, 1.6761, 0.1, 1.1228, 2.1537, 0.0808, 0.3313, 1.3693, 0.1238, 2.6495],
-    "requestRetention": 0.9,
-    "maximumInterval": 36500,
-  },
-  {
-    "deckName": "Opos::Tribulargo",
-    "w": [0.39, 0.41, 0.78, 9.04, 5.0394, 1.099, 0.9815, 0.0059, 1.4402, 0.1954, 0.8875, 2.2675, 0.0139, 0.3914, 1.3411, 0.1294, 2.5535],
-    "requestRetention": 0.86,
-    "maximumInterval": 36500,
   }
 ];
 
@@ -107,6 +89,47 @@ const ratings = {
   "good": 3,
   "easy": 4
 };
+
+// get the name of the card's tags
+// need to add <div id=tags tags_name="{{Tags}}"></div> to your card's front template's first line
+if (document.getElementById("tags") !== null) {
+  const tags_name = document.getElementById("tags").getAttribute("tags_name");
+  if (display_memory_state) {
+    fsrs_status.innerHTML += "<br>Tags name: " + tags_name;
+  }
+  
+  if (tags_name.includes("opos::tribulargo")) {
+    var w = [0.39, 0.41, 0.78, 9.04, 5.0394, 1.099, 0.9815, 0.0059, 1.4402, 0.1954, 0.8875, 2.2675, 0.0139, 0.3914, 1.3411, 0.1294, 2.5535];
+    requestRetention = 0.86;
+    maximumInterval = 36500;
+    easyBonus = 1.3;
+    hardInterval = 1.2;
+    if (display_memory_state) {
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos::tribulargo";
+    }
+  }
+  else if (tags_name.includes("opos::tribu")) {
+    var w = [8.46, 8.47, 8.47, 8.47, 4.9413, 1.1572, 1.0326, 0.0066, 1.6761, 0.1, 1.1228, 2.1537, 0.0808, 0.3313, 1.3693, 0.1238, 2.6495];
+    requestRetention = 0.9;
+    maximumInterval = 36500;
+    easyBonus = 1.3;
+    hardInterval = 1.2;
+    if (display_memory_state) {
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos::tribu";
+    }
+  }
+  else if (["admin", "civil", "conta", "eco", "mates", "merc"].some(v => tags_name.includes("opos::" + v))) {
+    var w = [1.06, 1.12, 3.22, 30.0, 4.8702, 1.2396, 1.1285, 0.0036, 1.7224, 0.1, 1.1574, 2.2221, 0.0657, 0.4223, 1.335, 0.0403, 2.9043];
+    requestRetention = 0.9;
+    maximumInterval = 36500;
+    easyBonus = 1.3;
+    hardInterval = 1.2;
+    if (display_memory_state) {
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos.cortas";
+    }
+  }
+}
+
 // For new cards
 if (is_new()) {
   init_states();
