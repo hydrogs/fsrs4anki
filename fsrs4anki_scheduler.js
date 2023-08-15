@@ -8,7 +8,7 @@ const deckParams = [
   {
     // Default parameters of FSRS4Anki for global
     "deckName": "global config for FSRS4Anki",
-    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61],
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60],
     // The above parameters can be optimized via FSRS4Anki optimizer.
     // For details about the parameters, please see: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
     // User's custom parameters for global
@@ -99,7 +99,7 @@ if (document.getElementById("tags") !== null) {
   }
   
   if (tags_name.includes("opos::tribulargo")) {
-    var w = [0.39, 0.41, 0.78, 9.04, 5.0394, 1.099, 0.9815, 0.0059, 1.4402, 0.1954, 0.8875, 2.2675, 0.0139, 0.3914, 1.3411, 0.1294, 2.5535];
+    var w = [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60];
     requestRetention = 0.86;
     maximumInterval = 36500;
     easyBonus = 1.3;
@@ -109,7 +109,7 @@ if (document.getElementById("tags") !== null) {
     }
   }
   else if (tags_name.includes("opos::tribu")) {
-    var w = [8.46, 8.47, 8.47, 8.47, 4.9413, 1.1572, 1.0326, 0.0066, 1.6761, 0.1, 1.1228, 2.1537, 0.0808, 0.3313, 1.3693, 0.1238, 2.6495];
+    var w = [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60];
     requestRetention = 0.9;
     maximumInterval = 36500;
     easyBonus = 1.3;
@@ -119,7 +119,7 @@ if (document.getElementById("tags") !== null) {
     }
   }
   else if (["admin", "civil", "conta", "eco", "mates", "merc"].some(v => tags_name.includes("opos::" + v))) {
-    var w = [1.06, 1.12, 3.22, 30.0, 4.8702, 1.2396, 1.1285, 0.0036, 1.7224, 0.1, 1.1574, 2.2221, 0.0657, 0.4223, 1.335, 0.0403, 2.9043];
+    var w = [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60];
     requestRetention = 0.9;
     maximumInterval = 36500;
     easyBonus = 1.3;
@@ -168,13 +168,13 @@ if (is_new()) {
   if (display_memory_state) {
     fsrs_status.innerHTML += "<br>D: " + last_d + "<br>S: " + last_s + "<br>R: " + (retrievability * 100).toFixed(2) + "%";
   }
-  customData.again.d = next_difficulty(last_d, "again");
+  customData.again.d = next_difficulty(last_d, retrievability, "again");
   customData.again.s = next_forget_stability(customData.again.d, last_s, retrievability);
-  customData.hard.d = next_difficulty(last_d, "hard");
+  customData.hard.d = next_difficulty(last_d, retrievability, "hard");
   customData.hard.s = next_recall_stability(customData.hard.d, last_s, retrievability, "hard");
-  customData.good.d = next_difficulty(last_d, "good");
+  customData.good.d = next_difficulty(last_d, retrievability, "good");
   customData.good.s = next_recall_stability(customData.good.d, last_s, retrievability, "good");
-  customData.easy.d = next_difficulty(last_d, "easy");
+  customData.easy.d = next_difficulty(last_d, retrievability, "easy");
   customData.easy.s = next_recall_stability(customData.easy.d, last_s, retrievability, "easy");
   let hard_interval = next_interval(customData.hard.s);
   let good_interval = next_interval(customData.good.s);
@@ -212,8 +212,9 @@ function next_interval(stability) {
   const new_interval = apply_fuzz(stability * intervalModifier);
   return Math.min(Math.max(Math.round(new_interval), 1), maximumInterval);
 }
-function next_difficulty(d, rating) {
-  let next_d = d - w[6] * (ratings[rating] - 3);
+function next_difficulty(d, retrievability, rating) {
+  let a = Math.exp(- w[18] * (retrievability - w[19]) * (ratings[rating] - w[20]))
+  let next_d = d - w[6] * a * (ratings[rating] - w[17]);
   return constrain_difficulty(mean_reversion(w[4], next_d));
 }
 function mean_reversion(init, current) {

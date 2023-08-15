@@ -8,7 +8,7 @@ const deckParams = [
   {
     // Default parameters of FSRS4Anki for global
     "deckName": "global config for FSRS4Anki",
-    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61],
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60],
     // The above parameters can be optimized via FSRS4Anki optimizer.
     // For details about the parameters, please see: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
     // User's custom parameters for global
@@ -20,7 +20,7 @@ const deckParams = [
   {
     // Example 1: User's custom parameters for this deck and its sub-decks.
     "deckName": "MainDeck1",
-    "w": [0.6, 0.9, 2.9, 6.8, 4.72, 1.02, 1, 0.04, 1.49, 0.17, 1.02, 2.15, 0.07, 0.35, 1.17, 0.32, 2.53],
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60],
     "requestRetention": 0.9,
     "maximumInterval": 36500,
   },
@@ -28,7 +28,7 @@ const deckParams = [
     // Example 2: User's custom parameters for this deck and its sub-decks.
     // Don't omit any keys.
     "deckName": "MainDeck2::SubDeck::SubSubDeck",
-    "w": [0.6, 0.9, 2.9, 6.8, 4.72, 1.02, 1, 0.04, 1.49, 0.17, 1.02, 2.15, 0.07, 0.35, 1.17, 0.32, 2.53],
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60],
     "requestRetention": 0.9,
     "maximumInterval": 36500,
   }
@@ -147,13 +147,13 @@ if (is_new()) {
   if (display_memory_state) {
     fsrs_status.innerHTML += "<br>D: " + last_d + "<br>S: " + last_s + "<br>R: " + (retrievability * 100).toFixed(2) + "%";
   }
-  customData.again.d = next_difficulty(last_d, "again");
+  customData.again.d = next_difficulty(last_d, retrievability, "again");
   customData.again.s = next_forget_stability(customData.again.d, last_s, retrievability);
-  customData.hard.d = next_difficulty(last_d, "hard");
+  customData.hard.d = next_difficulty(last_d, retrievability, "hard");
   customData.hard.s = next_recall_stability(customData.hard.d, last_s, retrievability, "hard");
-  customData.good.d = next_difficulty(last_d, "good");
+  customData.good.d = next_difficulty(last_d, retrievability, "good");
   customData.good.s = next_recall_stability(customData.good.d, last_s, retrievability, "good");
-  customData.easy.d = next_difficulty(last_d, "easy");
+  customData.easy.d = next_difficulty(last_d, retrievability, "easy");
   customData.easy.s = next_recall_stability(customData.easy.d, last_s, retrievability, "easy");
   let hard_interval = next_interval(customData.hard.s);
   let good_interval = next_interval(customData.good.s);
@@ -192,8 +192,9 @@ function next_interval(stability) {
   const new_interval = apply_fuzz(stability * intervalModifier);
   return Math.min(Math.max(Math.round(new_interval), 1), maximumInterval);
 }
-function next_difficulty(d, rating) {
-  let next_d = d - w[6] * (ratings[rating] - 3);
+function next_difficulty(d, retrievability, rating) {
+  let a = Math.exp(- w[18] * (retrievability - w[19]) * (ratings[rating] - w[20]))
+  let next_d = d - w[6] * a * (ratings[rating] - w[17]);
   return constrain_difficulty(mean_reversion(w[4], next_d));
 }
 function mean_reversion(init, current) {
