@@ -118,14 +118,14 @@ if (document.getElementById("tags") !== null) {
       fsrs_status.innerHTML += "<br>Tag used: " + "opos::tribu";
     }
   }
-  else if (["admin", "civil", "conta", "eco", "mates", "merc"].some(v => tags_name.includes("opos::" + v))) {
+  else if (tags_name.includes("opos")) {
     var w = [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60];
     requestRetention = 0.9;
     maximumInterval = 36500;
     easyBonus = 1.3;
     hardInterval = 1.2;
     if (display_memory_state) {
-      fsrs_status.innerHTML += "<br>Tag used: " + "opos.cortas";
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos";
     }
   }
 }
