@@ -39,6 +39,7 @@ _✨ A modern Anki [custom scheduling](https://faqs.ankiweb.net/the-2021-schedul
 - [FAQ](#faq)
 - [Compatibility](#compatibility)
 - [Contribute](#contribute)
+  - [Contributors](#contributors)
 - [Stargazers over time](#stargazers-over-time)
 
 # Introduction
@@ -149,13 +150,13 @@ There is a python package for the optimizer. This package has torch as a depende
 Install the package with the command:
 
 ```
-python -m pip install fsrs-optimizer
+python -m pip install fsrs_optimizer
 ```
 
-You should upgrade regularly to make sure you have the most recent version of FSRS-Optimizer:
+You should upgrade regularly to make sure you have the most recent version of [FSRS-Optimizer](https://github.com/open-spaced-repetition/fsrs-optimizer):
 
 ```
-python -m pip install fsrs-optimizer --upgrade
+python -m pip install fsrs_optimizer --upgrade
 ```
 
 #### Usage
@@ -164,19 +165,19 @@ Export your deck and cd into the folder to which you exported it.
 Then you can run:
 
 ```
-python -m fsrs-optimizer "package.(colpkg/apkg)"
+python -m fsrs_optimizer "package.(colpkg/apkg)"
 ```
 
 You can also list multiple files, e.g.:
 
 ```
-python -m fsrs-optimizer "file1.akpg" "file2.apkg"
+python -m fsrs_optimizer "file1.akpg" "file2.apkg"
 ```
 
 Wildcards are supported:
 
 ```
-python -m fsrs-optimizer *.apkg
+python -m fsrs_optimizer *.apkg
 ```
 
 There are certain options which are as follows:
@@ -296,6 +297,36 @@ Let me know via [issues](https://github.com/open-spaced-repetition/fsrs4anki/iss
 # Contribute
 
 You can contribute to FSRS4Anki by beta testing, submitting code, or sharing your data. If you want to share your data with me, please fill this form: https://forms.gle/KaojsBbhMCytaA7h8
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Expertium"><img src="https://avatars.githubusercontent.com/u/83031600?v=4?s=100" width="100px;" alt="Expertium"/><br /><sub><b>Expertium</b></sub></a><br /><a href="https://github.com/open-spaced-repetition/fsrs4anki/commits?author=Expertium" title="Tests">⚠️</a> <a href="https://github.com/open-spaced-repetition/fsrs4anki/commits?author=Expertium" title="Documentation">📖</a> <a href="#data-Expertium" title="Data">🔣</a> <a href="#ideas-Expertium" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/open-spaced-repetition/fsrs4anki/issues?q=author%3AExpertium" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/user1823"><img src="https://avatars.githubusercontent.com/u/92206575?v=4?s=100" width="100px;" alt="user1823"/><br /><sub><b>user1823</b></sub></a><br /><a href="https://github.com/open-spaced-repetition/fsrs4anki/commits?author=user1823" title="Tests">⚠️</a> <a href="https://github.com/open-spaced-repetition/fsrs4anki/commits?author=user1823" title="Documentation">📖</a> <a href="#data-user1823" title="Data">🔣</a> <a href="#ideas-user1823" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/open-spaced-repetition/fsrs4anki/issues?q=author%3Auser1823" title="Bug reports">🐛</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 # Stargazers over time
 
