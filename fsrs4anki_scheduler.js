@@ -1,4 +1,4 @@
-// FSRS4Anki v4.3.0 Scheduler Qt6
+// FSRS4Anki v4.5.6 Scheduler Qt6
 // Hydrogs' weights v2023.09.10
 set_version();
 // The latest version will be released on https://github.com/open-spaced-repetition/fsrs4anki/releases/latest
@@ -320,7 +320,7 @@ function is_empty() {
   return !customData.again.d | !customData.again.s | !customData.hard.d | !customData.hard.s | !customData.good.d | !customData.good.s | !customData.easy.d | !customData.easy.s;
 }
 function set_version() {
-  const version = "v4.3.0";
+  const version = "v4.5.6";
   customData.again.v = version;
   customData.hard.v = version;
   customData.good.v = version;
