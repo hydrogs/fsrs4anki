@@ -1,5 +1,5 @@
 // FSRS4Anki v4.5.6 Scheduler Qt6
-// Hydrogs' weights v2023.09.10
+// Hydrogs weights 2023.09.14
 set_version();
 // The latest version will be released on https://github.com/open-spaced-repetition/fsrs4anki/releases/latest
 
@@ -9,7 +9,7 @@ const deckParams = [
   {
     // Default parameters of FSRS4Anki for global
     "deckName": "global config for FSRS4Anki",
-    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.02, 3.1, 3.2, 0.9, 0.15, 2.60],
+    "w": [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61],
     // The above parameters can be optimized via FSRS4Anki optimizer.
     // For details about the parameters, please see: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
     // User's custom parameters for global
@@ -99,29 +99,19 @@ if (document.getElementById("tags") !== null) {
     fsrs_status.innerHTML += "<br>Tags name: " + tags_name;
   }
   
-  if (tags_name.includes("opos::tribulargo")) {
-    var w = [0.3777, 1.2131, 2.2436, 6.4809, 5.0570, 1.0718, 1.0021, 0.0181, 1.5001, 0.1934, 0.9520, 2.1966, 0.0470, 0.3396, 1.2516, 0.2556, 2.8167, 3.1485, 0.6988, 0.3779, 2.3331];
-    requestRetention = 0.85;
+  if (tags_name.includes("opos::largo")) {
+    var w = [0.4164, 0.6467, 2.539, 7.3403, 5.1223, 1.1324, 1.1829, 0.0195, 1.4789, 0.161, 0.9476, 2.1818, 0.0533, 0.3547, 1.3545, 0.1747, 2.6808];
+    requestRetention = 0.77;
     maximumInterval = 36500;
     easyBonus = 1.3;
     hardInterval = 1.2;
     if (display_memory_state) {
-      fsrs_status.innerHTML += "<br>Tag used: " + "opos::tribulargo";
-    }
-  }
-  else if (tags_name.includes("opos::tribu")) {
-    var w = [0.6415, 0.6415, 9.4905, 9.4905, 4.902, 1.1851, 1.0099, 0.0, 1.6937, 0.1, 1.1338, 2.2548, 0.0304, 0.4095, 1.3403, 0.2811, 2.7771, 3.0602, 0.6188, 0.3647, 2.2885];
-    requestRetention = 0.9077542662116042;
-    maximumInterval = 36500;
-    easyBonus = 1.3;
-    hardInterval = 1.2;
-    if (display_memory_state) {
-      fsrs_status.innerHTML += "<br>Tag used: " + "opos::tribu";
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos::largo";
     }
   }
   else if (tags_name.includes("opos")) {
-    var w = [0.7565, 1.0645, 8.1408, 11.7134, 4.9396, 1.3502, 0.9892, 0.0305, 1.6241, 0.1132, 1.0669, 2.2164, 0.0589, 0.4268, 1.2967, 0.0298, 2.7075, 2.9739, 0.6514, 0.3607, 2.2527];
-    requestRetention = 0.9075137039937353;
+    var w = [0.8176, 2.1578, 8.6461, 15.4843, 4.9111, 1.4086, 1.1971, 0.0016, 1.6949, 0.1, 1.1301, 2.2257, 0.0395, 0.4091, 1.289, 0.0052, 2.982];
+    requestRetention = 0.85;
     maximumInterval = 36500;
     easyBonus = 1.3;
     hardInterval = 1.2;
@@ -169,13 +159,13 @@ if (is_new()) {
   if (display_memory_state) {
     fsrs_status.innerHTML += "<br>D: " + last_d + "<br>S: " + last_s + "<br>R: " + (retrievability * 100).toFixed(2) + "%";
   }
-  customData.again.d = next_difficulty(last_d, retrievability, "again");
+  customData.again.d = next_difficulty(last_d, "again");
   customData.again.s = next_forget_stability(customData.again.d, last_s, retrievability);
-  customData.hard.d = next_difficulty(last_d, retrievability, "hard");
+  customData.hard.d = next_difficulty(last_d, "hard");
   customData.hard.s = next_recall_stability(customData.hard.d, last_s, retrievability, "hard");
-  customData.good.d = next_difficulty(last_d, retrievability, "good");
+  customData.good.d = next_difficulty(last_d, "good");
   customData.good.s = next_recall_stability(customData.good.d, last_s, retrievability, "good");
-  customData.easy.d = next_difficulty(last_d, retrievability, "easy");
+  customData.easy.d = next_difficulty(last_d, "easy");
   customData.easy.s = next_recall_stability(customData.easy.d, last_s, retrievability, "easy");
   let hard_interval = next_interval(customData.hard.s);
   let good_interval = next_interval(customData.good.s);
@@ -213,9 +203,8 @@ function next_interval(stability) {
   const new_interval = apply_fuzz(stability * intervalModifier);
   return Math.min(Math.max(Math.round(new_interval), 1), maximumInterval);
 }
-function next_difficulty(d, retrievability, rating) {
-  let a = Math.exp(- w[18] * (retrievability - w[19]) * (ratings[rating] - w[20]))
-  let next_d = d - w[6] * a * (ratings[rating] - w[17]);
+function next_difficulty(d, rating) {
+  let next_d = d - w[6] * (ratings[rating] - 3);
   return constrain_difficulty(mean_reversion(w[4], next_d));
 }
 function mean_reversion(init, current) {
