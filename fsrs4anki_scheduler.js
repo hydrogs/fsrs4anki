@@ -1,5 +1,5 @@
 // FSRS4Anki v4.5.6 Scheduler Qt6
-// Hydrogs weights 2023.09.14
+// Hydrogs weights 2023.09.19
 set_version();
 // The latest version will be released on https://github.com/open-spaced-repetition/fsrs4anki/releases/latest
 
@@ -99,9 +99,19 @@ if (document.getElementById("tags") !== null) {
     fsrs_status.innerHTML += "<br>Tags name: " + tags_name;
   }
   
-  if (tags_name.includes("opos::largo")) {
-    var w = [0.4164, 0.6467, 2.539, 7.3403, 5.1223, 1.1324, 1.1829, 0.0195, 1.4789, 0.161, 0.9476, 2.1818, 0.0533, 0.3547, 1.3545, 0.1747, 2.6808];
-    requestRetention = 0.77;
+  if (tags_name.includes("opos::art") || tags_name.includes("opos::conta::cuentas")) {
+    var w = [0.4307, 1.1122, 3.2752, 5.8, 5.0272, 1.0396, 0.9515, 0.0066, 1.4144, 0.2104, 0.8641, 2.1137, 0.1138, 0.2732, 1.1975, 0.2407, 2.5793];
+    requestRetention = 0.81;
+    maximumInterval = 36500;
+    easyBonus = 1.3;
+    hardInterval = 1.2;
+    if (display_memory_state) {
+      fsrs_status.innerHTML += "<br>Tag used: " + "opos::numero";
+    }
+  }
+  else if (tags_name.includes("opos::largo")) {
+    var w = [0.4262, 0.673, 2.7784, 6.1941, 5.1083, 1.1399, 1.1589, 0.0103, 1.4885, 0.1302, 0.9494, 2.2041, 0.0418, 0.3755, 1.3493, 0.1825, 2.6535];
+    requestRetention = 0.8;
     maximumInterval = 36500;
     easyBonus = 1.3;
     hardInterval = 1.2;
@@ -110,7 +120,7 @@ if (document.getElementById("tags") !== null) {
     }
   }
   else if (tags_name.includes("opos")) {
-    var w = [0.8176, 2.1578, 8.6461, 15.4843, 4.9111, 1.4086, 1.1971, 0.0016, 1.6949, 0.1, 1.1301, 2.2257, 0.0395, 0.4091, 1.289, 0.0052, 2.982];
+    var w = [0.7648, 2.1247, 8.4317, 15.2936, 4.8944, 1.3306, 1.2581, 0.0, 1.7306, 0.1, 1.1602, 2.2486, 0.0312, 0.4217, 1.3208, 0.0069, 2.9652];
     requestRetention = 0.85;
     maximumInterval = 36500;
     easyBonus = 1.3;
