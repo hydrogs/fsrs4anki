@@ -1,5 +1,5 @@
 // FSRS4Anki v4.5.6 Scheduler Qt6
-// Hydrogs weights 2023.09.19
+// Hydrogs weights 2023.09.26
 set_version();
 // The latest version will be released on https://github.com/open-spaced-repetition/fsrs4anki/releases/latest
 
@@ -99,9 +99,13 @@ if (document.getElementById("tags") !== null) {
     fsrs_status.innerHTML += "<br>Tags name: " + tags_name;
   }
   
-  if (tags_name.includes("opos::art") || tags_name.includes("opos::conta::cuentas")) {
-    var w = [0.4307, 1.1122, 3.2752, 5.8, 5.0272, 1.0396, 0.9515, 0.0066, 1.4144, 0.2104, 0.8641, 2.1137, 0.1138, 0.2732, 1.1975, 0.2407, 2.5793];
-    requestRetention = 0.81;
+  if (
+    tags_name.includes("opos::art")
+    || tags_name.includes("opos::conta::cuentas")
+    || tags_name.includes("opos::numero")
+  ) {
+    var w = [0.4211, 1.1031, 2.1359, 6.254, 5.0737, 1.0646, 1.0052, 0.0085, 1.3869, 0.2443, 0.8372, 2.1386, 0.0889, 0.2991, 1.1839, 0.1945, 2.5088];
+    requestRetention = 0.76;
     maximumInterval = 36500;
     easyBonus = 1.3;
     hardInterval = 1.2;
@@ -110,7 +114,7 @@ if (document.getElementById("tags") !== null) {
     }
   }
   else if (tags_name.includes("opos::largo")) {
-    var w = [0.4262, 0.673, 2.7784, 6.1941, 5.1083, 1.1399, 1.1589, 0.0103, 1.4885, 0.1302, 0.9494, 2.2041, 0.0418, 0.3755, 1.3493, 0.1825, 2.6535];
+    var w = [0.4139, 0.6621, 1.8483, 9.4414, 5.043, 1.1373, 1.1278, 0.0002, 1.5108, 0.128, 0.9508, 2.226, 0.0546, 0.3886, 1.3183, 0.2106, 2.8277];
     requestRetention = 0.8;
     maximumInterval = 36500;
     easyBonus = 1.3;
@@ -120,7 +124,7 @@ if (document.getElementById("tags") !== null) {
     }
   }
   else if (tags_name.includes("opos")) {
-    var w = [0.7648, 2.1247, 8.4317, 15.2936, 4.8944, 1.3306, 1.2581, 0.0, 1.7306, 0.1, 1.1602, 2.2486, 0.0312, 0.4217, 1.3208, 0.0069, 2.9652];
+    var w = [0.7481, 3.2038, 8.0212, 20.879, 4.8807, 1.3784, 1.3281, 0.0, 1.7397, 0.1, 1.1717, 2.2456, 0.0345, 0.4289, 1.3227, 0.0087, 2.9993];
     requestRetention = 0.85;
     maximumInterval = 36500;
     easyBonus = 1.3;
